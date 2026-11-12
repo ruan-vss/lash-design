@@ -97,7 +97,7 @@ export const AdminLayout = () => {
   };
 
   return (
-    <div className="admin-shell min-h-screen flex bg-[#f8f7f5] text-espresso-900">
+    <div className="admin-shell min-h-screen flex bg-nude-100 text-espresso-900">
       {sidebarOpen && (
         <button
           type="button"
@@ -210,7 +210,7 @@ export const AdminLayout = () => {
           <div className="flex items-center gap-2">
             <Link
               to="/admin/agenda?new=1"
-              className="min-h-[40px] inline-flex items-center gap-2 px-3.5 rounded-lg bg-espresso-900 hover:bg-espresso-800 text-caption font-semibold text-white transition-colors"
+              className="min-h-[40px] inline-flex items-center gap-2 px-3.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-caption font-semibold text-white transition-colors"
             >
               <Plus className="w-4 h-4" />
               <span className="hidden sm:inline">Nova reserva</span>

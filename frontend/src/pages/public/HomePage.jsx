@@ -35,7 +35,7 @@ export const HomePage = () => {
         <div className="max-w-6xl mx-auto px-3.5 sm:px-6 py-8 sm:py-12 sm:py-16 lg:py-20 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
           <div>
             <p className="text-sm font-semibold text-nude-700 mb-4">Atendimento com hora marcada</p>
-            <h1 id="home-title" className="text-4xl sm:text-5xl lg:text-[3.5rem] font-bold tracking-[-0.045em] leading-[1.05] text-espresso-900 max-w-2xl">
+            <h1 id="home-title" className="text-4xl sm:text-5xl lg:text-display font-light tracking-normal leading-tight text-espresso-900 max-w-2xl">
               Cílios personalizados para valorizar o seu olhar.
             </h1>
             <p className="mt-5 text-base sm:text-lg text-nude-800 leading-relaxed max-w-xl">
@@ -45,14 +45,14 @@ export const HomePage = () => {
             <div className="mt-7 flex flex-col sm:flex-row gap-3">
               <Link
                 to="/agendar"
-                className="min-h-[52px] inline-flex items-center justify-center gap-2 bg-espresso-900 hover:bg-espresso-800 text-white font-semibold px-6 py-3 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+                className="min-h-[52px] inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
                 <Calendar className="w-5 h-5" aria-hidden="true" />
                 Agendar horário
               </Link>
               <Link
                 to="/servicos"
-                className="min-h-[52px] inline-flex items-center justify-center gap-2 bg-white hover:bg-nude-50 text-espresso-900 font-semibold px-6 py-3 rounded-xl border border-nude-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+                className="min-h-[52px] inline-flex items-center justify-center gap-2 bg-white hover:bg-nude-50 text-espresso-900 font-semibold px-6 py-3 rounded-xl border border-nude-300 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               >
                 Ver serviços
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -154,7 +154,7 @@ export const HomePage = () => {
                   <span className="text-lg font-bold tabular-nums text-espresso-900">{formatCurrency(service.price)}</span>
                   <Link
                     to={`/agendar?serviceId=${service.id}`}
-                    className="min-h-[44px] inline-flex items-center justify-center px-4 py-2 rounded-xl bg-espresso-900 hover:bg-espresso-800 text-white text-sm font-semibold transition-colors"
+                    className="min-h-[44px] inline-flex items-center justify-center px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
                     aria-label={`Agendar ${service.name}`}
                   >
                     Agendar

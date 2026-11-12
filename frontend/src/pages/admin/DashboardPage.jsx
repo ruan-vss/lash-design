@@ -193,15 +193,15 @@ export const DashboardPage = () => {
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <AreaChart data={charts.revenueByDay || []}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E6D7CE" vertical={false} />
-                    <XAxis dataKey="date" tick={{ fontSize: 12, fill: '#7B5446' }} />
-                    <YAxis tick={{ fontSize: 12, fill: '#7B5446' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
+                    <XAxis dataKey="date" tick={{ fontSize: 12, fill: '#525252' }} />
+                    <YAxis tick={{ fontSize: 12, fill: '#525252' }} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#261B17',
-                        borderColor: '#3A2A24',
+                        backgroundColor: '#161616',
+                        borderColor: '#393939',
                         borderRadius: '12px',
-                        color: '#FAF7F5',
+                        color: '#ffffff',
                         fontSize: '12px',
                       }}
                     />
@@ -209,9 +209,9 @@ export const DashboardPage = () => {
                       type="monotone"
                       dataKey="revenue"
                       name="Receita concluída"
-                      stroke="#966956"
+                      stroke="#0f62fe"
                       strokeWidth={2}
-                      fill="#E6D7CE"
+                      fill="#e0e0e0"
                     />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -225,19 +225,19 @@ export const DashboardPage = () => {
               <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={charts.topServices || []}>
-                    <CartesianGrid strokeDasharray="3 3" stroke="#E6D7CE" vertical={false} />
-                    <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#7B5446' }} />
-                    <YAxis tick={{ fontSize: 12, fill: '#7B5446' }} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" vertical={false} />
+                    <XAxis dataKey="name" tick={{ fontSize: 12, fill: '#525252' }} />
+                    <YAxis tick={{ fontSize: 12, fill: '#525252' }} />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#261B17',
-                        borderColor: '#3A2A24',
+                        backgroundColor: '#161616',
+                        borderColor: '#393939',
                         borderRadius: '12px',
-                        color: '#FAF7F5',
+                        color: '#ffffff',
                         fontSize: '12px',
                       }}
                     />
-                    <Bar dataKey="count" name="Agendamentos" fill="#966956" radius={[8, 8, 0, 0]} />
+                    <Bar dataKey="count" name="Agendamentos" fill="#0f62fe" radius={0} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>

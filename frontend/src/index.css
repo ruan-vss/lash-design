@@ -3,277 +3,69 @@
 @tailwind utilities;
 
 @layer base {
-  html {
-    -webkit-tap-highlight-color: transparent;
-    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  :root {
+    --cds-interactive: #0f62fe;
+    --cds-text-primary: #161616;
+    --cds-text-secondary: #525252;
+    --cds-background: #ffffff;
+    --cds-layer-01: #f4f4f4;
+    --cds-border-subtle-01: #c6c6c6;
+    --cds-support-error: #da1e28;
+    --cds-support-success: #24a148;
+    --cds-support-warning: #f1c21b;
+    --font-body: 'IBM Plex Sans', system-ui, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
   }
-
-  /* Cormorant Garamond brilha apenas em tamanhos grandes (h1, h2, display) */
-  h1, h2, .font-display {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    letter-spacing: -0.02em;
-  }
-
-  /* Títulos menores usam Plus Jakarta Sans para nitidez e leitura imediata */
-  h3, h4, h5, h6 {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-    letter-spacing: -0.015em;
-  }
-
-  /* Acessibilidade: respeito estrito a prefers-reduced-motion */
+  html, body, #root { min-height: 100%; }
+  html { -webkit-tap-highlight-color: transparent; }
+  body { background: var(--cds-background); color: var(--cds-text-primary); font-size: 1rem; line-height: 1.5; }
+  body, button, input, select, textarea { font-family: var(--font-body); }
+  h1, h2, h3, h4, h5, h6 { font-family: var(--font-body); font-weight: 400; letter-spacing: 0; }
+  code, pre { font-family: var(--font-mono); }
+  :focus-visible { outline: 2px solid var(--cds-interactive); outline-offset: 2px; }
+  ::selection { background: #d0e2ff; color: #161616; }
   @media (prefers-reduced-motion: reduce) {
-    *, ::before, ::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+    *, ::before, ::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
   }
 }
 
 @layer components {
-  /* Arquitetura de Cards em 3 níveis (Inspirado em CentraCart) */
-  .card {
-    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card transition-all duration-250 ease-luxury;
-  }
-
-  .card-interactive {
-    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card transition-all duration-250 ease-luxury hover:border-nude-400 hover:shadow-soft hover:-translate-y-0.5 focus-within:ring-2 focus-within:ring-nude-500/40;
-  }
-
-  .card-featured {
-    @apply bg-espresso-900 text-nude-50 border border-espresso-800 rounded-3xl shadow-lifted relative overflow-hidden;
-  }
-
-  /* Tipografia funcional e numérica */
-  .eyebrow {
-    @apply font-sans text-caption font-semibold uppercase tracking-[0.14em] text-nude-600 inline-flex items-center gap-1.5;
-  }
-
-  .kpi-value {
-    @apply font-sans text-2xl sm:text-3xl font-bold tracking-tight text-espresso-900 tabular-nums;
-  }
-
-  .price {
-    @apply font-sans font-bold tracking-tight text-espresso-900 tabular-nums;
-  }
-
-  /* Campos de Formulário Padronizados (Alvo de toque >= 44px) */
-  .label-field {
-    @apply block text-caption font-semibold text-espresso-800 mb-1.5 tracking-wide;
-  }
-
-  .input-field {
-    @apply w-full min-h-[44px] px-3.5 py-2.5 text-small text-espresso-900 bg-white rounded-xl border border-nude-300 shadow-inner placeholder:text-nude-400 transition-all duration-200 focus:outline-none focus:border-nude-600 focus:ring-2 focus:ring-nude-500/20 disabled:bg-nude-100 disabled:text-nude-500;
-  }
-
-  /* Tabelas Administrativas estilo CentraCart */
-  .table-container {
-    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card overflow-hidden;
-  }
-
-  .table-scroll {
-    @apply w-full overflow-x-auto;
-  }
-
-  .table-clean {
-    @apply w-full text-left border-collapse text-small;
-  }
-
-  .table-clean thead tr {
-    @apply border-b border-nude-200 bg-nude-50/80 text-nude-700;
-  }
-
-  .table-clean th {
-    @apply py-3.5 px-4 text-caption font-semibold uppercase tracking-[0.08em] whitespace-nowrap;
-  }
-
-  .table-clean tbody {
-    @apply divide-y divide-nude-100;
-  }
-
-  .table-clean tbody tr {
-    @apply transition-colors hover:bg-nude-50/60;
-  }
-
-  .table-clean td {
-    @apply py-3.5 px-4 align-middle text-espresso-900;
-  }
+  .card, .card-interactive, .table-container { @apply bg-white border border-nude-200 rounded-none shadow-none; }
+  .card-interactive { @apply transition-colors duration-250 hover:bg-nude-100 focus-within:outline focus-within:outline-2 focus-within:outline-blue-600; }
+  .card-featured { @apply bg-espresso-900 text-white border border-espresso-800 rounded-none relative overflow-hidden; }
+  .eyebrow { @apply text-caption font-semibold text-nude-700 inline-flex items-center gap-2; }
+  .kpi-value { @apply text-3xl font-normal text-espresso-900 tabular-nums; }
+  .price { @apply font-semibold text-espresso-900 tabular-nums; }
+  .label-field { @apply block text-caption font-normal text-nude-700 mb-2; }
+  .input-field { @apply w-full min-h-[48px] px-4 py-3 text-small text-espresso-900 bg-nude-100 rounded-none border-0 border-b border-nude-500 shadow-none placeholder:text-nude-500 disabled:text-nude-400 disabled:border-nude-300; }
+  .input-field:focus { outline: 2px solid var(--cds-interactive); outline-offset: -2px; }
+  .input-field[aria-invalid="true"] { outline: 2px solid var(--cds-support-error); outline-offset: -2px; }
+  .table-container { @apply overflow-hidden; }
+  .table-scroll { @apply w-full overflow-x-auto; }
+  .table-clean { @apply w-full text-left border-collapse text-small; }
+  .table-clean thead tr { @apply bg-nude-200 text-espresso-900; }
+  .table-clean th { @apply h-12 px-4 py-3 font-semibold whitespace-nowrap; }
+  .table-clean tbody { @apply divide-y divide-nude-200; }
+  .table-clean tbody tr { @apply bg-nude-100 transition-colors hover:bg-nude-150; }
+  .table-clean td { @apply h-12 px-4 py-3 align-middle text-espresso-900; }
 }
 
-/* Customização Editorial do React Day Picker v8 */
-.rdp {
-  --rdp-cell-size: 44px;
-  --rdp-accent-color: #966956;
-  --rdp-background-color: #F3ECE7;
-  margin: 0;
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-}
-
-.rdp-caption_label {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: 1.35rem;
-  font-weight: 600;
-  color: #261B17;
-  text-transform: capitalize;
-}
-
-.rdp-head_cell {
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: #7B5446;
-}
-
-.rdp-day {
-  border-radius: 0.75rem !important;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  transition: all 150ms ease;
-}
-
-.rdp-day_selected:not([disabled]) {
-  background-color: #966956 !important;
-  color: #FAF7F5 !important;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(150, 105, 86, 0.25);
-}
-
-.rdp-day_today:not(.rdp-day_selected) {
-  border: 1px solid #C29D8B;
-  font-weight: 700;
-}
-/* Refinamento visual global — mantém a paleta original e não altera a lógica da aplicação. */
-@layer base {
-  html, body, #root {
-    min-height: 100%;
-  }
-
-  body, button, input, select, textarea {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-  }
-
-  h1, h2, h3, h4, h5, h6, .font-display, .font-serif {
-    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
-    letter-spacing: -0.035em;
-  }
-
-  button, a, input, select, textarea {
-    -webkit-tap-highlight-color: transparent;
-  }
-
-  :focus-visible {
-    outline: 2px solid #966956;
-    outline-offset: 2px;
-  }
-
-  ::selection {
-    background: #D5BCAE;
-    color: #261B17;
-  }
-}
-
-@layer components {
-  .card,
-  .card-interactive,
-  .table-container {
-    border-color: rgba(230, 215, 206, 0.9);
-    box-shadow: 0 2px 5px rgba(38, 27, 23, 0.035), 0 1px 2px rgba(38, 27, 23, 0.025);
-  }
-
-  .card-interactive:hover {
-    box-shadow: 0 12px 28px rgba(38, 27, 23, 0.075);
-  }
-
-  .input-field {
-    box-shadow: none;
-  }
-
-  .input-field:focus {
-    box-shadow: 0 0 0 3px rgba(150, 105, 86, 0.12);
-  }
-
-  .table-clean th {
-    font-size: 0.6875rem;
-  }
-}
-
-/* Componentes e layouts: acabamento consistente entre área pública e administrativa. */
-.admin-shell aside {
-  box-shadow: 1px 0 0 rgba(230, 215, 206, 0.35);
-}
-
-.admin-shell nav a,
-.admin-shell header a,
-.public-shell header a {
-  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
-}
-
-.admin-shell nav a[aria-current="page"] {
-  box-shadow: inset 3px 0 0 #C29D8B;
-}
-
-.public-shell main,
-.admin-shell main {
-  min-width: 0;
-}
-
-.rdp-caption_label {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
-  font-size: 1rem;
-  letter-spacing: -0.025em;
-}
-
-@media (max-width: 640px) {
-  .card, .card-interactive, .card-featured, .table-container {
-    border-radius: 1rem;
-  }
-}
-
-/* Página pública: acabamento minimalista e acessível. */
-.skip-link {
-  position: fixed;
-  left: 1rem;
-  top: 0.75rem;
-  z-index: 100;
-  transform: translateY(-180%);
-  padding: 0.7rem 1rem;
-  border-radius: 0.75rem;
-  background: #261B17;
-  color: #fff;
-  font-weight: 700;
-  font-size: 0.875rem;
-}
-
-.skip-link:focus {
-  transform: translateY(0);
-}
-
-.public-shell a,
-.public-shell button,
-.public-shell input,
-.public-shell select,
-.public-shell textarea {
-  scroll-margin-top: 6rem;
-}
-
-.public-shell p,
-.public-shell li,
-.public-shell dd {
-  text-wrap: pretty;
-}
-
-@media (prefers-contrast: more) {
-  .public-shell {
-    --tw-text-opacity: 1;
-  }
-
-  .public-shell .border-nude-200,
-  .public-shell .border-nude-300 {
-    border-color: #7B5446 !important;
-  }
-}
+.rdp { --rdp-cell-size: 44px; --rdp-accent-color: #0f62fe; --rdp-background-color: #edf5ff; margin: 0; font-family: var(--font-body); }
+.rdp-caption_label { font-size: 1.25rem; font-weight: 400; color: #161616; text-transform: capitalize; }
+.rdp-head_cell { font-size: .75rem; font-weight: 600; color: #525252; }
+.rdp-day { border-radius: 0 !important; font-variant-numeric: tabular-nums; }
+.rdp-day_selected:not([disabled]) { background: #0f62fe !important; color: white !important; }
+.rdp-day_today:not(.rdp-day_selected) { outline: 1px solid #0f62fe; outline-offset: -1px; }
+.admin-shell main, .public-shell main { min-width: 0; }
+.admin-shell nav a[aria-current="page"] { box-shadow: inset 3px 0 0 #0f62fe; background: #edf5ff; color: #0043ce; }
+.public-shell nav a[aria-current="page"] { box-shadow: inset 0 -2px #0f62fe; color: #0043ce; }
+.admin-shell .eyebrow { display: none; }
+.admin-content h1 { font-weight: 400; }
+.skip-link { position: fixed; left: 1rem; top: .75rem; z-index: 100; transform: translateY(-180%); padding: .75rem 1rem; background: #0f62fe; color: white; }
+.skip-link:focus { transform: translateY(0); }
+.public-shell a, .public-shell button, .public-shell input, .public-shell select, .public-shell textarea { scroll-margin-top: 6rem; }
+@media (prefers-contrast: more) { .card, .card-interactive, .input-field, .table-container { border-color: #525252; } }
+@media (max-width: 767px) { .admin-content { padding: 1rem; } .admin-shell .input-field { font-size: 16px; } }
 
 /* Responsividade pública — mobile first (320px+). */
 @media (max-width: 639px) {
@@ -340,7 +132,7 @@
   }
 
   .booking-card {
-    border-radius: 1rem;
+    border-radius: 0;
   }
 
   .booking-actions > button,
@@ -412,123 +204,5 @@
 
   .booking-slots {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
-}
-
-/* =========================================================
-   ADMIN — linguagem visual funcional e minimalista
-   ========================================================= */
-.admin-shell {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-}
-
-.admin-shell h1,
-.admin-shell h2,
-.admin-shell h3,
-.admin-shell h4,
-.admin-shell .font-serif,
-.admin-shell .font-display {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
-  letter-spacing: -0.025em;
-}
-
-.admin-shell .eyebrow {
-  display: none;
-}
-
-.admin-content > div > div:first-child h1,
-.admin-content > div > div:first-child > div:first-child h1 {
-  font-size: clamp(1.55rem, 3vw, 2rem) !important;
-  line-height: 1.2 !important;
-  font-weight: 700 !important;
-  margin-top: 0 !important;
-}
-
-.admin-content > div > div:first-child p,
-.admin-content > div > div:first-child > div:first-child p {
-  margin-top: .35rem;
-  color: #7B6A62;
-  max-width: 48rem;
-}
-
-.admin-shell .card,
-.admin-shell .card-interactive,
-.admin-shell .table-container {
-  border-radius: 14px;
-  box-shadow: 0 1px 2px rgba(38, 27, 23, 0.025);
-}
-
-.admin-shell .card:hover {
-  box-shadow: 0 1px 2px rgba(38, 27, 23, 0.025);
-}
-
-.admin-shell .input-field {
-  min-height: 42px;
-  border-radius: 10px;
-  box-shadow: none;
-}
-
-.admin-shell .input-field:focus {
-  box-shadow: 0 0 0 3px rgba(150, 105, 86, 0.10);
-}
-
-.admin-shell .table-clean th {
-  padding-top: .7rem;
-  padding-bottom: .7rem;
-  font-size: .68rem;
-  letter-spacing: .055em;
-}
-
-.admin-shell .table-clean td {
-  padding-top: .8rem;
-  padding-bottom: .8rem;
-}
-
-.admin-shell .table-clean tbody tr:hover {
-  background: rgba(250, 247, 245, .68);
-}
-
-.admin-shell .kpi-value {
-  font-size: clamp(1.4rem, 3vw, 1.85rem);
-}
-
-.admin-shell button,
-.admin-shell a,
-.admin-shell input,
-.admin-shell select,
-.admin-shell textarea {
-  -webkit-tap-highlight-color: transparent;
-}
-
-@media (max-width: 767px) {
-  .admin-content {
-    padding: 1rem;
-  }
-
-  .admin-content > div {
-    gap: 1rem;
-  }
-
-  .admin-content > div > div:first-child h1,
-  .admin-content > div > div:first-child > div:first-child h1 {
-    font-size: 1.5rem !important;
-  }
-
-  .admin-shell .card {
-    border-radius: 12px;
-  }
-
-  .admin-shell .table-container {
-    border-radius: 12px;
-  }
-
-  .admin-shell .table-clean th,
-  .admin-shell .table-clean td {
-    padding-left: .85rem;
-    padding-right: .85rem;
-  }
-
-  .admin-shell .input-field {
-    font-size: 16px;
   }
 }

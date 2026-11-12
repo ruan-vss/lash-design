@@ -12,15 +12,15 @@ export const Button = ({
   ...props
 }) => {
   const base =
-    'inline-flex items-center justify-center font-sans font-semibold rounded-xl transition-all duration-250 ease-luxury focus:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2 focus-visible:ring-offset-nude-50 active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100';
+    'inline-flex items-center justify-center font-sans font-normal rounded-none transition-all duration-250 ease-luxury focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2 focus-visible:ring-offset-nude-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100';
 
   const variants = {
     primary:
-      'bg-nude-600 text-white hover:bg-nude-700 shadow-sm hover:shadow-soft border border-transparent',
+      'bg-blue-600 text-white hover:bg-blue-700 shadow-none border border-transparent',
     secondary:
-      'bg-white text-espresso-900 hover:bg-nude-100/80 border border-nude-300 shadow-card',
+      'bg-espresso-800 text-white hover:bg-espresso-900 border border-transparent',
     outline:
-      'bg-transparent border border-nude-400 text-nude-800 hover:bg-nude-100/70 hover:border-nude-500',
+      'bg-transparent border border-blue-600 text-blue-600 hover:bg-nude-100/70 hover:border-nude-500',
     danger:
       'bg-rose-500 text-white hover:bg-rose-600 shadow-sm border border-transparent focus-visible:ring-rose-500',
     ghost:
@@ -31,9 +31,9 @@ export const Button = ({
 
   // Todos os tamanhos respeitam altura confortável de toque em mobile
   const sizes = {
-    sm: 'min-h-[38px] px-3.5 py-2 text-caption gap-1.5',
-    md: 'min-h-[44px] px-5 py-2.5 text-small gap-2',
-    lg: 'min-h-[52px] px-7 py-3.5 text-body gap-2.5',
+    sm: 'min-h-[40px] px-3.5 py-2 text-caption gap-1.5',
+    md: 'min-h-[48px] px-5 py-2.5 text-small gap-2',
+    lg: 'min-h-[64px] px-7 py-3.5 text-body gap-2.5',
   };
 
   return (

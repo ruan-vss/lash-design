@@ -64,3 +64,11 @@ DATABASE_URL=postgresql://... node scripts/smoke.mjs
 
 ## Limitações conhecidas
 Telefone da cliente não é verificado por código (WhatsApp/SMS); sem CAPTCHA; limites de taxa em memória (1 instância da API); token do admin em `localStorage`.
+
+## Design visual
+
+O frontend adota a linguagem visual da referência Carbon enviada para o projeto: azul `#0f62fe`, superfícies neutras, cantos retos e tipografia IBM Plex servida localmente. Os tokens ficam em `frontend/tailwind.config.js` e `frontend/src/index.css`; os componentes reutilizáveis ficam em `frontend/src/components/common/UI.jsx`.
+
+As cores `nude` e `espresso` permanecem como aliases de compatibilidade nas telas existentes, agora mapeados para cinzas. Use `blue` para ações e foco, `rose` para erros e preserve cores semânticas de status. Use a escala de espaçamento do Tailwind e os componentes compartilhados para manter consistência.
+
+Para validar alterações visuais: `cd frontend && npm ci && npm run lint && npm run build`. A validação visual com dados simulados não substitui os testes de integração da API e do PostgreSQL.

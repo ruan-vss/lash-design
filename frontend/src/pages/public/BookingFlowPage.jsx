@@ -312,9 +312,9 @@ export const BookingFlowPage = () => {
                         toggleServiceSelection(service.id);
                       }
                     }}
-                    className={`cursor-pointer border rounded-2xl p-5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 ${
+                    className={`cursor-pointer border rounded-2xl p-5 transition-all duration-200 flex flex-col sm:flex-row sm:items-center justify-between gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                       isSelected
-                        ? 'border-nude-600 bg-nude-50/90 ring-1 ring-nude-600 shadow-soft'
+                        ? 'border-nude-600 bg-nude-50/90 ring-1 ring-blue-600 shadow-soft'
                         : 'border-nude-200 bg-white hover:border-nude-400'
                     }`}
                   >
@@ -451,7 +451,7 @@ export const BookingFlowPage = () => {
                   key={slot}
                   type="button"
                   onClick={() => setSelectedSlot(slot)}
-                  className={`min-h-[48px] py-3 px-4 rounded-2xl text-small font-bold border tabular-nums transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 ${
+                  className={`min-h-[48px] py-3 px-4 rounded-2xl text-small font-bold border tabular-nums transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 ${
                     selectedSlot === slot
                       ? 'bg-espresso-900 text-nude-50 border-espresso-900 shadow-soft scale-[1.02]'
                       : 'bg-white text-espresso-900 border-nude-200 hover:border-nude-500 hover:bg-nude-50'

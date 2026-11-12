@@ -31,7 +31,7 @@ export const PublicLayout = () => {
         <div className="max-w-6xl mx-auto px-3.5 sm:px-6 h-16 sm:h-[72px] flex items-center justify-between gap-4">
           <Link
             to="/"
-            className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+            className="flex items-center gap-2.5 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             aria-label={`${studio.studioName} — página inicial`}
           >
             <div className="w-9 h-9 rounded-xl bg-espresso-900 text-white flex items-center justify-center" aria-hidden="true">
@@ -55,7 +55,7 @@ export const PublicLayout = () => {
           <div className="hidden md:flex items-center gap-2">
             <Link
               to="/admin/login"
-              className="min-h-[44px] inline-flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold text-nude-700 hover:text-espresso-900 hover:bg-nude-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+              className="min-h-[44px] inline-flex items-center gap-2 px-3 py-2.5 rounded-xl text-sm font-semibold text-nude-700 hover:text-espresso-900 hover:bg-nude-50 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
               aria-label="Acessar painel administrativo"
             >
               <LogIn className="w-4 h-4" aria-hidden="true" />
@@ -63,7 +63,7 @@ export const PublicLayout = () => {
             </Link>
             <Link
               to="/agendar"
-              className="min-h-[44px] inline-flex items-center gap-2 bg-espresso-900 hover:bg-espresso-800 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+              className="min-h-[44px] inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold px-4 py-2.5 rounded-xl transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
             >
               <Calendar className="w-4 h-4" aria-hidden="true" />
               Agendar
@@ -134,7 +134,7 @@ export const PublicLayout = () => {
           href={whatsappLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="fixed bottom-4 right-4 z-30 min-h-[48px] min-w-[48px] inline-flex items-center justify-center sm:justify-start gap-2 bg-espresso-900 hover:bg-espresso-800 text-white px-3.5 sm:px-4 py-3 rounded-full shadow-soft text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nude-600 focus-visible:ring-offset-2"
+          className="fixed bottom-4 right-4 z-30 min-h-[48px] min-w-[48px] inline-flex items-center justify-center sm:justify-start gap-2 bg-blue-600 hover:bg-blue-700 text-white px-3.5 sm:px-4 py-3 rounded-full shadow-soft text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
           aria-label="Abrir atendimento pelo WhatsApp em nova aba"
         >
           <PhoneCall className="w-4 h-4" aria-hidden="true" />

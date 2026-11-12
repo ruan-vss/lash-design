@@ -143,7 +143,7 @@ export const CatalogPage = () => {
 
                 <Link
                   to={`/agendar?serviceId=${service.id}`}
-                  className="min-h-[44px] inline-flex items-center justify-center gap-2 bg-nude-600 hover:bg-nude-700 text-white text-small font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all duration-250"
+                  className="min-h-[44px] inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-small font-semibold px-5 py-2.5 rounded-xl shadow-sm transition-all duration-250"
                 >
                   <Calendar className="w-4 h-4" />
                   Agendar este serviço

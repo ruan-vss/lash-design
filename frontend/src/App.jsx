@@ -18,10 +18,10 @@ export default function App() {
             toastOptions={{
               duration: 4000,
               style: {
-                background: '#261B17',
-                color: '#FAF7F5',
-                fontSize: '13px',
-                borderRadius: '12px',
+                background: '#161616',
+                color: '#ffffff',
+                fontSize: '14px',
+                borderRadius: '0',
               },
             }}
           />
