@@ -1,0 +1,534 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Cormorant Garamond brilha apenas em tamanhos grandes (h1, h2, display) */
+  h1, h2, .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    letter-spacing: -0.02em;
+  }
+
+  /* Títulos menores usam Plus Jakarta Sans para nitidez e leitura imediata */
+  h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    letter-spacing: -0.015em;
+  }
+
+  /* Acessibilidade: respeito estrito a prefers-reduced-motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Arquitetura de Cards em 3 níveis (Inspirado em CentraCart) */
+  .card {
+    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card transition-all duration-250 ease-luxury;
+  }
+
+  .card-interactive {
+    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card transition-all duration-250 ease-luxury hover:border-nude-400 hover:shadow-soft hover:-translate-y-0.5 focus-within:ring-2 focus-within:ring-nude-500/40;
+  }
+
+  .card-featured {
+    @apply bg-espresso-900 text-nude-50 border border-espresso-800 rounded-3xl shadow-lifted relative overflow-hidden;
+  }
+
+  /* Tipografia funcional e numérica */
+  .eyebrow {
+    @apply font-sans text-caption font-semibold uppercase tracking-[0.14em] text-nude-600 inline-flex items-center gap-1.5;
+  }
+
+  .kpi-value {
+    @apply font-sans text-2xl sm:text-3xl font-bold tracking-tight text-espresso-900 tabular-nums;
+  }
+
+  .price {
+    @apply font-sans font-bold tracking-tight text-espresso-900 tabular-nums;
+  }
+
+  /* Campos de Formulário Padronizados (Alvo de toque >= 44px) */
+  .label-field {
+    @apply block text-caption font-semibold text-espresso-800 mb-1.5 tracking-wide;
+  }
+
+  .input-field {
+    @apply w-full min-h-[44px] px-3.5 py-2.5 text-small text-espresso-900 bg-white rounded-xl border border-nude-300 shadow-inner placeholder:text-nude-400 transition-all duration-200 focus:outline-none focus:border-nude-600 focus:ring-2 focus:ring-nude-500/20 disabled:bg-nude-100 disabled:text-nude-500;
+  }
+
+  /* Tabelas Administrativas estilo CentraCart */
+  .table-container {
+    @apply bg-white border border-nude-200/90 rounded-2xl shadow-card overflow-hidden;
+  }
+
+  .table-scroll {
+    @apply w-full overflow-x-auto;
+  }
+
+  .table-clean {
+    @apply w-full text-left border-collapse text-small;
+  }
+
+  .table-clean thead tr {
+    @apply border-b border-nude-200 bg-nude-50/80 text-nude-700;
+  }
+
+  .table-clean th {
+    @apply py-3.5 px-4 text-caption font-semibold uppercase tracking-[0.08em] whitespace-nowrap;
+  }
+
+  .table-clean tbody {
+    @apply divide-y divide-nude-100;
+  }
+
+  .table-clean tbody tr {
+    @apply transition-colors hover:bg-nude-50/60;
+  }
+
+  .table-clean td {
+    @apply py-3.5 px-4 align-middle text-espresso-900;
+  }
+}
+
+/* Customização Editorial do React Day Picker v8 */
+.rdp {
+  --rdp-cell-size: 44px;
+  --rdp-accent-color: #966956;
+  --rdp-background-color: #F3ECE7;
+  margin: 0;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.rdp-caption_label {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #261B17;
+  text-transform: capitalize;
+}
+
+.rdp-head_cell {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #7B5446;
+}
+
+.rdp-day {
+  border-radius: 0.75rem !important;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  transition: all 150ms ease;
+}
+
+.rdp-day_selected:not([disabled]) {
+  background-color: #966956 !important;
+  color: #FAF7F5 !important;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(150, 105, 86, 0.25);
+}
+
+.rdp-day_today:not(.rdp-day_selected) {
+  border: 1px solid #C29D8B;
+  font-weight: 700;
+}
+/* Refinamento visual global — mantém a paleta original e não altera a lógica da aplicação. */
+@layer base {
+  html, body, #root {
+    min-height: 100%;
+  }
+
+  body, button, input, select, textarea {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-display, .font-serif {
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    letter-spacing: -0.035em;
+  }
+
+  button, a, input, select, textarea {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid #966956;
+    outline-offset: 2px;
+  }
+
+  ::selection {
+    background: #D5BCAE;
+    color: #261B17;
+  }
+}
+
+@layer components {
+  .card,
+  .card-interactive,
+  .table-container {
+    border-color: rgba(230, 215, 206, 0.9);
+    box-shadow: 0 2px 5px rgba(38, 27, 23, 0.035), 0 1px 2px rgba(38, 27, 23, 0.025);
+  }
+
+  .card-interactive:hover {
+    box-shadow: 0 12px 28px rgba(38, 27, 23, 0.075);
+  }
+
+  .input-field {
+    box-shadow: none;
+  }
+
+  .input-field:focus {
+    box-shadow: 0 0 0 3px rgba(150, 105, 86, 0.12);
+  }
+
+  .table-clean th {
+    font-size: 0.6875rem;
+  }
+}
+
+/* Componentes e layouts: acabamento consistente entre área pública e administrativa. */
+.admin-shell aside {
+  box-shadow: 1px 0 0 rgba(230, 215, 206, 0.35);
+}
+
+.admin-shell nav a,
+.admin-shell header a,
+.public-shell header a {
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.admin-shell nav a[aria-current="page"] {
+  box-shadow: inset 3px 0 0 #C29D8B;
+}
+
+.public-shell main,
+.admin-shell main {
+  min-width: 0;
+}
+
+.rdp-caption_label {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+@media (max-width: 640px) {
+  .card, .card-interactive, .card-featured, .table-container {
+    border-radius: 1rem;
+  }
+}
+
+/* Página pública: acabamento minimalista e acessível. */
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 100;
+  transform: translateY(-180%);
+  padding: 0.7rem 1rem;
+  border-radius: 0.75rem;
+  background: #261B17;
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+.public-shell a,
+.public-shell button,
+.public-shell input,
+.public-shell select,
+.public-shell textarea {
+  scroll-margin-top: 6rem;
+}
+
+.public-shell p,
+.public-shell li,
+.public-shell dd {
+  text-wrap: pretty;
+}
+
+@media (prefers-contrast: more) {
+  .public-shell {
+    --tw-text-opacity: 1;
+  }
+
+  .public-shell .border-nude-200,
+  .public-shell .border-nude-300 {
+    border-color: #7B5446 !important;
+  }
+}
+
+/* Responsividade pública — mobile first (320px+). */
+@media (max-width: 639px) {
+  html, body, #root {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .public-shell {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: clip;
+  }
+
+  .public-shell main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .public-shell h1 {
+    font-size: clamp(2rem, 10vw, 2.65rem);
+    line-height: 1.08;
+    overflow-wrap: anywhere;
+  }
+
+  .public-shell h2 {
+    font-size: clamp(1.55rem, 7vw, 2rem);
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+  }
+
+  .public-shell h3,
+  .public-shell p,
+  .public-shell span,
+  .public-shell strong,
+  .public-shell a,
+  .public-shell button {
+    overflow-wrap: anywhere;
+  }
+
+  .public-shell img,
+  .public-shell svg {
+    max-width: 100%;
+  }
+
+  .public-shell .card,
+  .public-shell .card-interactive,
+  .public-shell .card-featured {
+    min-width: 0;
+  }
+
+  .public-booking {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .booking-stepper {
+    position: sticky;
+    top: 4.5rem;
+    z-index: 20;
+    background: rgba(255,255,255,.97);
+    backdrop-filter: blur(10px);
+  }
+
+  .booking-card {
+    border-radius: 1rem;
+  }
+
+  .booking-actions > button,
+  .booking-actions > a {
+    width: 100%;
+    min-height: 48px;
+    justify-content: center;
+  }
+
+  .booking-calendar .rdp {
+    --rdp-cell-size: min(11.5vw, 42px);
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .booking-calendar .rdp-months,
+  .booking-calendar .rdp-month,
+  .booking-calendar .rdp-table {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .booking-calendar .rdp-table {
+    table-layout: fixed;
+  }
+
+  .booking-calendar .rdp-caption {
+    padding-inline: .25rem;
+  }
+
+  .booking-calendar .rdp-caption_label {
+    font-size: .95rem !important;
+  }
+
+  .booking-calendar .rdp-head_cell {
+    font-size: .625rem;
+  }
+
+  .booking-slots button {
+    width: 100%;
+    padding-inline: .5rem;
+  }
+
+  .public-shell input,
+  .public-shell select,
+  .public-shell textarea {
+    font-size: 16px; /* evita zoom automático no iOS */
+  }
+
+  .public-shell footer {
+    margin-top: 2.5rem;
+  }
+
+  .public-shell footer a {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 359px) {
+  .public-shell header .leading-tight span:last-child {
+    display: none;
+  }
+
+  .booking-calendar .rdp {
+    --rdp-cell-size: 36px;
+  }
+
+  .booking-slots {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+}
+
+/* =========================================================
+   ADMIN — linguagem visual funcional e minimalista
+   ========================================================= */
+.admin-shell {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+.admin-shell h1,
+.admin-shell h2,
+.admin-shell h3,
+.admin-shell h4,
+.admin-shell .font-serif,
+.admin-shell .font-display {
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  letter-spacing: -0.025em;
+}
+
+.admin-shell .eyebrow {
+  display: none;
+}
+
+.admin-content > div > div:first-child h1,
+.admin-content > div > div:first-child > div:first-child h1 {
+  font-size: clamp(1.55rem, 3vw, 2rem) !important;
+  line-height: 1.2 !important;
+  font-weight: 700 !important;
+  margin-top: 0 !important;
+}
+
+.admin-content > div > div:first-child p,
+.admin-content > div > div:first-child > div:first-child p {
+  margin-top: .35rem;
+  color: #7B6A62;
+  max-width: 48rem;
+}
+
+.admin-shell .card,
+.admin-shell .card-interactive,
+.admin-shell .table-container {
+  border-radius: 14px;
+  box-shadow: 0 1px 2px rgba(38, 27, 23, 0.025);
+}
+
+.admin-shell .card:hover {
+  box-shadow: 0 1px 2px rgba(38, 27, 23, 0.025);
+}
+
+.admin-shell .input-field {
+  min-height: 42px;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+.admin-shell .input-field:focus {
+  box-shadow: 0 0 0 3px rgba(150, 105, 86, 0.10);
+}
+
+.admin-shell .table-clean th {
+  padding-top: .7rem;
+  padding-bottom: .7rem;
+  font-size: .68rem;
+  letter-spacing: .055em;
+}
+
+.admin-shell .table-clean td {
+  padding-top: .8rem;
+  padding-bottom: .8rem;
+}
+
+.admin-shell .table-clean tbody tr:hover {
+  background: rgba(250, 247, 245, .68);
+}
+
+.admin-shell .kpi-value {
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+}
+
+.admin-shell button,
+.admin-shell a,
+.admin-shell input,
+.admin-shell select,
+.admin-shell textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media (max-width: 767px) {
+  .admin-content {
+    padding: 1rem;
+  }
+
+  .admin-content > div {
+    gap: 1rem;
+  }
+
+  .admin-content > div > div:first-child h1,
+  .admin-content > div > div:first-child > div:first-child h1 {
+    font-size: 1.5rem !important;
+  }
+
+  .admin-shell .card {
+    border-radius: 12px;
+  }
+
+  .admin-shell .table-container {
+    border-radius: 12px;
+  }
+
+  .admin-shell .table-clean th,
+  .admin-shell .table-clean td {
+    padding-left: .85rem;
+    padding-right: .85rem;
+  }
+
+  .admin-shell .input-field {
+    font-size: 16px;
+  }
+}

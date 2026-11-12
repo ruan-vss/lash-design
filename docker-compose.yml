@@ -1,0 +1,98 @@
+# Lash SaaS — API + PostgreSQL (rede interna) + Caddy (HTTPS automático + frontend)
+#
+# Redes:
+#   internal : isolada (sem acesso à internet). Só API e banco conversam aqui.
+#   public   : Caddy <-> API (e saída para WhatsApp/e-mail).
+# O PostgreSQL NÃO publica porta no host.
+
+name: lash-saas
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lash
+      POSTGRES_USER: lash
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?defina POSTGRES_PASSWORD no .env}
+      TZ: America/Sao_Paulo
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks: [internal]
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lash -d lash"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  api:
+    build:
+      context: ./backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: "3001"
+      TZ: America/Sao_Paulo
+      TRUST_PROXY: "1" # exatamente um proxy confiável: o Caddy
+      FRONTEND_URL: https://${DOMAIN:?defina DOMAIN no .env}
+      DATABASE_URL: postgresql://lash:${POSTGRES_PASSWORD}@db:5432/lash
+      DB_SSL: "false" # rede interna isolada
+      JWT_SECRET: ${JWT_SECRET:?defina JWT_SECRET no .env}
+      CLIENT_LOOKUP_SECRET: ${CLIENT_LOOKUP_SECRET:?defina CLIENT_LOOKUP_SECRET no .env}
+      JWT_EXPIRES_IN: 15m
+      SEED_ADMIN_EMAIL: ${SEED_ADMIN_EMAIL:-}
+      SEED_ADMIN_PASSWORD: ${SEED_ADMIN_PASSWORD:-}
+      RESEND_API_KEY: ${RESEND_API_KEY:-}
+      EMAIL_FROM: ${EMAIL_FROM:-}
+      PASSWORD_RESET_URL: https://${DOMAIN}/admin/redefinir-senha
+      WHATSAPP_PHONE_NUMBER_ID: ${WHATSAPP_PHONE_NUMBER_ID:-}
+      WHATSAPP_ACCESS_TOKEN: ${WHATSAPP_ACCESS_TOKEN:-}
+      WHATSAPP_VERIFY_TOKEN: ${WHATSAPP_VERIFY_TOKEN:-}
+      WHATSAPP_APP_SECRET: ${WHATSAPP_APP_SECRET:-}
+    networks: [internal, public]
+    read_only: true
+    tmpfs: ["/tmp"]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3001/api/v1/public/studio').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  web:
+    build:
+      context: .
+      dockerfile: web.Dockerfile
+    restart: unless-stopped
+    depends_on:
+      api:
+        condition: service_healthy
+    environment:
+      DOMAIN: ${DOMAIN}
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - caddy_data:/data
+      - caddy_config:/config
+    networks: [public]
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: ["no-new-privileges:true"]
+
+networks:
+  internal:
+    internal: true
+  public: {}
+
+volumes:
+  pgdata:
+  caddy_data:
+  caddy_config:

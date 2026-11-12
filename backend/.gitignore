@@ -1,0 +1,18 @@
+# Dependências
+node_modules/
+
+# Variáveis de ambiente e segredos (NUNCA versionar)
+.env
+.env.*
+!.env.example
+
+# Logs e cobertura de testes
+logs/
+*.log
+npm-debug.log*
+coverage/
+
+# Sistema Operacional / IDEs
+.DS_Store
+.vscode/
+.idea/
